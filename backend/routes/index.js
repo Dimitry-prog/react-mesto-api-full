@@ -8,6 +8,12 @@ import NotFoundError from '../errors/NotFoundError .js';
 
 const router = new Router();
 
+router.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 router.post('/signup', validationSignup, registerUser);
 router.post('/signin', validationSignin, loginUser);
 router.get('/logout', logoutUser);

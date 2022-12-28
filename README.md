@@ -3,4 +3,9 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-[link to project page](http://sprint-15.nomoredomains.club/sign-up).
+[link to project page](http://sprint-15.nomoredomains.club/sign-up)
+
+* IP 158.160.19.61
+* [Frontend](https://github.com/Dimitry-prog/react-mesto-api-full/tree/main/frontend)
+* [Backend](https://github.com/Dimitry-prog/react-mesto-api-full/tree/main/backend)
+
