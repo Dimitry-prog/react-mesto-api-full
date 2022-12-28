@@ -1,0 +1,13 @@
+.signup {
+  width: 358px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 60px 0 115px;
+}
+
+@media screen and (max-width: 470px) {
+  .signup {
+    width: 260px;
+    padding: 40px 0 75px;
+  }
+}
