@@ -6,7 +6,7 @@ import Loader from "./Loader";
 const Main = () => {
   const {currentUser, cards, handleEditAvatarClick, handleEditProfileClick, handleAddProfileClick} = useAppContext();
 
-  if (Object.keys(currentUser).length === 0 || !cards.length) {
+  if (Object.keys(currentUser).length === 0) {
     return <Loader/>
   }
 

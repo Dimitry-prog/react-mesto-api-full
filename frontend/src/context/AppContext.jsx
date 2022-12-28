@@ -145,43 +145,29 @@ const AppProvider = ({children}) => {
       .finally(() => setIsLoading(false));
   }
 
-  const handleLogout = () => {
-      setIsLoading(true);
-      logout()
-          .then(res => {
-          setIsAuth(false);
-              setIsOpenSidebar(false);
-          navigate('/signin');
-      })
-          .catch(e => {
-              console.log(e);
-          })
-          .finally(() => setIsLoading(false));
-  }
+    const handleLogout = () => {
+        setIsLoading(true);
+        logout()
+            .then(res => {
+                setIsAuth(false);
+                setIsOpenSidebar(false);
+                navigate('/signin');
+            })
+            .catch(e => {
+                console.log(e);
+            })
+            .finally(() => setIsLoading(false));
+    }
 
   useEffect(() => {
     if(isAuth) {
-        console.log(isAuth)
-        console.log(currentUser)
       setIsLoading(true);
-
-        // const cards = fetch('http://localhost:5000/cards', {
-        //     credentials: 'include',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }).then(res => res.json())
-        //     .then(res => console.log(res));
-        // console.log(cards)
-
 
       api.getInitialAppState()
         .then(res => {
-            console.log(res)
           const [userInfo, initCards] = res;
           setCurrentUser(userInfo);
           setCards(initCards);
-
         })
         .catch(e => {
           console.log(e);
@@ -213,20 +199,9 @@ const AppProvider = ({children}) => {
     }
   }, [isOpen]);
 
-  // useEffect(() => {
-  //     if (isAuth) {
-  //         navigate('/');
-  //     }
-  // }, [isAuth]);
-
-
   useEffect(() => {
-   // const token = localStorage.getItem('token');
-      console.log(userInfo)
-
       checkUserToken()
         .then(res => {
-            console.log(res)
           setUserInfo({email: res.email});
           setIsAuth(true);
           navigate('/');
@@ -272,7 +247,7 @@ const AppProvider = ({children}) => {
         setIsOpenSidebar,
         handleRegisterSubmit,
         handleLoginSubmit,
-          handleLogout
+        handleLogout
       }}
     >
       {children}
