@@ -9,6 +9,7 @@ import { corsOptions, limiter } from './utils/constants.js';
 import appRouter from './routes/index.js';
 import handleErrors from './middlewares/handleErrors.js';
 import { errorLogger, requestLogger } from './middlewares/logger.js';
+import verifyToken from './checkJWT.js';
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ const startApp = async () => {
       useNewUrlParser: true,
     });
     app.listen(PORT, () => console.log(`SERVER WORKS!!! at port ${PORT}`));
+    verifyToken();
   } catch (e) {
     console.log(e);
   }
