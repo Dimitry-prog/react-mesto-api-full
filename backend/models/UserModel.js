@@ -47,15 +47,15 @@ const userModel = new mongoose.Schema({
 });
 
 userModel.statics.findUserByCredentials = async function findUserByCredentials(email, password) {
-  const findUser = await this.findOne({ email }).select('+password');
-  if (!findUser) {
+  const foundUser = await this.findOne({ email }).select('+password');
+  if (!foundUser) {
     throw new RequiredAuthError('Authorization required');
   }
-  const checkPassword = await bcrypt.compare(password, findUser.password);
+  const checkPassword = await bcrypt.compare(password, foundUser.password);
   if (!checkPassword) {
     throw new RequiredAuthError('Authorization required');
   }
-  return findUser;
+  return foundUser;
 };
 
 export default mongoose.model('userModel', userModel);

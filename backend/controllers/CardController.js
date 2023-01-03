@@ -19,7 +19,7 @@ export const createCard = async (req, res, next) => {
 
 export const getCards = async (req, res, next) => {
   try {
-    const cards = await CardModel.find().populate(['owner', 'likes']);
+    const cards = await CardModel.find().sort({ createdAt: -1 }).populate(['owner', 'likes']);
     return res.json(cards);
   } catch (e) {
     return next(e);

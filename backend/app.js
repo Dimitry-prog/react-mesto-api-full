@@ -16,14 +16,14 @@ const PORT = 3000;
 const DB_URL = 'mongodb://127.0.0.1:27017/mestodb';
 const app = express();
 
+app.use(requestLogger);
+
 app.use(helmet());
 app.use(limiter);
 app.use(cookieParser());
 app.use(express.json());
 
 app.use(express.static('../frontend/build'));
-
-app.use(requestLogger);
 
 app.use(cors(corsOptions));
 
@@ -39,7 +39,7 @@ const startApp = async () => {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
-    app.listen(PORT, () => console.log('SERVER WORK!!!'));
+    app.listen(PORT, () => console.log('SERVER WORKS!!!'));
   } catch (e) {
     console.log(e);
   }
