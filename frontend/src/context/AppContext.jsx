@@ -2,7 +2,6 @@ import {createContext, useContext, useEffect, useState} from "react";
 import {api} from "../utils/Api";
 import {authorizeUser, checkUserToken, logout, registerUser} from "../utils/authentication";
 import {useNavigate} from "react-router-dom";
-import {BASE_URL, TEST} from '../utils/constants';
 
 const AppContext = createContext();
 

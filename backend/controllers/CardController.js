@@ -4,11 +4,30 @@ import CardModel from '../models/CardModel.js';
 import { httpStatusCode } from '../utils/constants.js';
 import ForbiddenError from '../errors/ForbiddenError.js';
 
+const updateStatusCard = async (id, options, res, next) => {
+  try {
+    const card = await CardModel
+      .findByIdAndUpdate(id, options, { new: true })
+      .populate(['owner', 'likes']);
+
+    if (!card) {
+      return next(new NotFoundError('Card not found'));
+    }
+    return res.json(card);
+  } catch (e) {
+    if (e.name === 'CastError') {
+      return next(new BadRequestError());
+    }
+    return next(e);
+  }
+};
+
 export const createCard = async (req, res, next) => {
   try {
     const { name, link } = req.body;
     const card = await CardModel.create({ name, link, owner: req.user._id });
-    return res.status(httpStatusCode.created).json(card);
+    res.status(httpStatusCode.created);
+    return updateStatusCard(card._id, {}, res, next);
   } catch (e) {
     if (e.name === 'ValidationError') {
       return next(new BadRequestError());
@@ -19,7 +38,7 @@ export const createCard = async (req, res, next) => {
 
 export const getCards = async (req, res, next) => {
   try {
-    const cards = await CardModel.find().sort({ createdAt: -1 }).populate(['owner', 'likes']);
+    const cards = await CardModel.find({}).sort({ createdAt: -1 }).populate(['owner', 'likes']);
     return res.json(cards);
   } catch (e) {
     return next(e);
@@ -39,24 +58,6 @@ export const deleteCard = async (req, res, next) => {
 
     await card.remove();
 
-    return res.json(card);
-  } catch (e) {
-    if (e.name === 'CastError') {
-      return next(new BadRequestError());
-    }
-    return next(e);
-  }
-};
-
-const updateStatusCard = async (id, options, res, next) => {
-  try {
-    const card = await CardModel
-      .findByIdAndUpdate(id, options, { new: true })
-      .populate(['owner', 'likes']);
-
-    if (!card) {
-      return next(new NotFoundError('Card not found'));
-    }
     return res.json(card);
   } catch (e) {
     if (e.name === 'CastError') {
