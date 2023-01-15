@@ -40,7 +40,6 @@ const startApp = async () => {
       useNewUrlParser: true,
     });
     app.listen(PORT, () => console.log(`SERVER WORKS!!! at port ${PORT}`));
-    verifyToken();
   } catch (e) {
     console.log(e);
   }
