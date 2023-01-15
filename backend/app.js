@@ -9,7 +9,6 @@ import { corsOptions, limiter } from './utils/constants.js';
 import appRouter from './routes/index.js';
 import handleErrors from './middlewares/handleErrors.js';
 import { errorLogger, requestLogger } from './middlewares/logger.js';
-import verifyToken from './checkJWT.js';
 
 dotenv.config();
 
